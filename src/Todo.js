@@ -1,18 +1,16 @@
 import React from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
-export const Todo = ({ todo, removeTodo }) => {
+export const Todo = ({ todo, removeTodo, onOpen }) => {
   const handlerRemove = (id) => {
     removeTodo(id)
   }
   return (
     <TouchableOpacity
-      onPress={() => {
-        console.log('Press', todo.id)
-      }}
+      onPress={() => onOpen(todo.id)}
       onLongPress={() => handlerRemove(todo.id)}
       activeOpacity={0.5}>
-      <View style={styles.todo1}>
+      <View style={styles.todo}>
         <Text>{todo.title}</Text>
       </View>
     </TouchableOpacity>
@@ -20,7 +18,7 @@ export const Todo = ({ todo, removeTodo }) => {
 }
 
 const styles = StyleSheet.create({
-  todo1: {
+  todo: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

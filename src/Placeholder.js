@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native'
 export const Placeholder = () => {
   return (
     <View style={styles.block}>
-      <Text>Note Todo</Text>
+      <Text>Not Todo</Text>
     </View>
   )
 }
