@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: '10%',
+    height: '15%',
   },
   input: {
     padding: 10,

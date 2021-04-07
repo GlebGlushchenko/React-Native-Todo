@@ -10,15 +10,15 @@ export const Todo = ({ todo, removeTodo, onOpen }) => {
       onPress={() => onOpen(todo.id)}
       onLongPress={() => handlerRemove(todo.id)}
       activeOpacity={0.5}>
-      <View style={styles.todo}>
-        <Text>{todo.title}</Text>
+      <View style={styles.todo1}>
+        <Text style={styles.text}>{todo.title}</Text>
       </View>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
-  todo: {
+  todo1: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -28,5 +28,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#DFDFDF',
     marginTop: 10,
+  },
+  text: {
+    fontFamily: 'robotoRegular',
   },
 })

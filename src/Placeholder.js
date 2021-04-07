@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import noItemImg from '../src/img/noTodo.gif'
 
 export const Placeholder = () => {
   return (
     <View style={styles.block}>
-      <Text>Not Todo</Text>
+      <Image style={styles.img} source={noItemImg} />
+      <Text style={styles.text}>Not Todo</Text>
     </View>
   )
 }
@@ -18,6 +20,14 @@ const styles = StyleSheet.create({
     right: '15%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#B6B6B6',
+  },
+  img: {
+    width: 150,
+    height: 150,
+    marginBottom: 50,
+  },
+  text: {
+    fontSize: 25,
+    textTransform: 'uppercase',
   },
 })

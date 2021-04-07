@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: 30,
-    paddingVertical: 20,
-    height: '80%',
+    paddingVertical: 30,
+    height: '95%',
     position: 'relative',
   },
 })

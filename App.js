@@ -1,19 +1,46 @@
 import React, { useState } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
+import * as Font from 'expo-font'
+import { AppLoading } from 'expo'
 
 import { Navbar } from './src/Navbar'
-
 import { MainScreen } from './src/screens/MainScreen'
 import { TodoScreen } from './src/screens/TodoScreen'
 
+async function loadApplication() {
+  await Font.loadAsync({
+    robotoRegular: require('./assets/fonts/Roboto-Bold.ttf'),
+  })
+}
+
 export default function App() {
+  const [isReady, setIsReady] = useState(false)
   const [todoId, setTodoId] = useState(null)
   const [todos, setTodos] = useState([
     {
-      id: 1,
-      title: 'edasd',
+      id: '1',
+      title: 'Выучть React JS',
+    },
+    {
+      id: '2',
+      title: 'Выучть React Native',
+    },
+    {
+      id: '3',
+      title: 'Выучть React Native',
     },
   ])
+  if (!isReady) {
+    return (
+      <AppLoading
+        startAsync={loadApplication}
+        onError={console.log('Error')}
+        onFinish={() => {
+          setIsReady(true)
+        }}
+      />
+    )
+  }
   const titleText = 'Todo App'
 
   const addTodo = (title) => {
@@ -21,23 +48,51 @@ export default function App() {
   }
 
   const removeTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+    const todoName = todos.find((t) => t.id === id)
+
+    Alert.alert('Remove Todo', ` You are sure remove ${todoName.title}?`, [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Remove',
+        style: 'positive',
+        onPress: () => {
+          setTodoId(null)
+          setTodos((prev) => prev.filter((todo) => todo.id !== id))
+        },
+      },
+    ])
   }
   const onOpen = (id) => {
     setTodoId(id)
   }
-  const backToMainScreen = () => {
+  const goBack = () => {
     setTodoId(null)
   }
+
+  const updateTodo = (id, title) => {
+    setTodos((old) =>
+      old.map((todo) => {
+        if (todo.id === id) {
+          todo.title = title
+        }
+        return todo
+      }),
+    )
+  }
+
   let content = (
     <MainScreen onOpen={onOpen} removeTodo={removeTodo} addTodo={addTodo} todos={todos} />
   )
 
   if (todoId) {
+    const selectedTodo = todos.find((todo) => todo.id === todoId)
+
     content = (
       <TodoScreen
-        todo={todos.find((todo) => todo.id === todoId)}
-        backToMainScreen={backToMainScreen}
+        onChangeTodo={updateTodo}
+        removeTodo={removeTodo}
+        todo={selectedTodo}
+        goBack={goBack}
       />
     )
   }
@@ -51,16 +106,8 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 30,
-    paddingVertical: 20,
-
-    position: 'relative',
-  },
   appWrapper: {
-    // flexDirection: 'column',
-    // backgroundColor: '#EEEEEE',
-    // justifyContent: 'space-between',
+    backgroundColor: '#FFFFFF',
   },
   placeholder: {
     position: 'absolute',

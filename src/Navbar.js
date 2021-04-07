@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     backgroundColor: '#B6B6B6',
     paddingBottom: 10,
-    marginBottom: 20,
   },
   text: {
     fontSize: 20,
     color: 'white',
+    fontFamily: 'roboto-regular',
   },
 })
